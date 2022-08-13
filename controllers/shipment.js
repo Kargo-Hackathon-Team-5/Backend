@@ -9,7 +9,7 @@ const listShipments = async (req, res) => {
             {
                 model: Driver,
                 as: 'driver',
-                attributes: {exclude: ['status', 'createdAt', 'updatedAt']}
+                attributes: ['id', 'name']
             },
             {
                 model: Truck,

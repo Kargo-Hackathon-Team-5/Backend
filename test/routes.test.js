@@ -44,4 +44,50 @@ describe('User API', () => {
         expect(res.statusCode).toEqual(200)
         expect(res.body).toHaveProperty('message')
     })
+
+    it('should show shipment', async () => {
+        const res = await request(app).get('/api/shipment')
+        expect(res.status).toEqual(200)
+        expect(res.body).toHaveProperty('data')
+    }),
+
+    it('should show one shipment', async () => {
+        const res = await request(app).get('/api/shipment/1')
+        expect(res.status).toEqual(200)
+        expect(res.body).toHaveProperty('data')
+    }),
+
+    it('should create a new shipment', async () => {
+        const res = await request(app)
+            .post('/api/shipment')
+            .send({
+                origin: "Bandung",
+                destination: "Jakarta",
+                loading_date: "2022-07-01",
+            })
+        expect(res.statusCode).toEqual(201)
+        expect(res.body).toHaveProperty('message')
+    })
+
+    it('should update a shipment', async () => {
+        const res = await request(app)
+            .put('/api/shipment/1')
+            .send({
+                origin: "Bandung",
+                destination: "Jakarta",
+                loading_date: "2022-07-01",
+            })
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toHaveProperty('message')
+    })
+
+    it('should show list city', async () => {
+        const res = await request(app).get('/api/service/city')
+        expect(res.status).toEqual(200)
+        expect(res.body).toHaveProperty('data')
+    }),
+
+    afterAll(done => {
+        done();
+    });
 })
