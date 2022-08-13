@@ -62,7 +62,7 @@ const addTruck = async (req, res) => {
         }
 
         db.Truck.create(req.body).then((result) => {
-            res.rest.success("Truck has been added successfully")
+            res.rest.created("Truck has been added successfully")
         });
     } catch (error) {
         res.rest.badRequest(error.message)

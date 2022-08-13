@@ -1,6 +1,6 @@
 const db = require("../models");
 const res = require("express/lib/response");
-const { body, validationResult } = require('express-validator')
+const { body, validationResult } = require('express-validator/check')
 
 const validate = (method) => {
     switch (method) {
@@ -12,15 +12,6 @@ const validate = (method) => {
           body('license', 'license doesnt exists').exists()
          ]   
       }
-      case 'updateDriver': {
-        return [ 
-            body('name', 'Name doesnt exists').exists(),
-            body('phone', 'Phone doesnt exists').exists(),
-            body('id_card', 'IDCard doesnt exists').exists(),
-            body('license', 'License doesnt exists').exists(),
-            body('status', 'Status doesnt exists').exists()
-          ]   
-       }
     }
 }
 
@@ -58,7 +49,7 @@ const createDriver = async(req, res)=> {
         }
 
         const savedDriver = await db.Driver.create(req.body);
-        res.rest.success({data: savedDriver});
+        res.rest.created({data: savedDriver});
     }catch(error){
         res.rest.serverError(error.message);
     }

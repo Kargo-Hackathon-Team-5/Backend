@@ -56,7 +56,7 @@ const detailShipment = async (req, res) => {
 const createShipment = async(req, res)=> {
     try{
         const savedDriver = await db.Shipment.create(req.body);
-        res.rest.success({data: savedDriver});
+        res.rest.created({data: savedDriver});
     }catch(error){
         res.rest.serverError(error.message);
     }
