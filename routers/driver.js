@@ -4,3 +4,8 @@ const driver = require("../controllers/driver");
 
 
 module.exports = router;
+
+router.get("/", driver.listDrivers);
+router.get("/:id", driver.detailDriver);
+router.post("/", driver.createDriver);
+router.put("/:id", driver.updateDriver);
