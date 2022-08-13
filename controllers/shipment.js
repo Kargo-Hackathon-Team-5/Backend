@@ -8,20 +8,13 @@ const listShipments = async (req, res) => {
                 model: Driver,
                 as: 'driver',
                 attributes: ['id', 'name']
-            },
-            {
-                model: User,
-                as: 'user',
-                attributes: ['id', 'name']
-            },
-            {
-                model: Item,
-                as: 'item',
-                attributes: ['id', 'name', 'price']
             }
         ]
 
-        const data = await db.Shipment.findAll();
+        const data = await db.Shipment.findAll({
+            include: relations
+        });
+        
         res.rest.success({ data: data });
     } catch (error) {
         console.log(error);
