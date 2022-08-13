@@ -4,7 +4,6 @@ const { faker } = require('@faker-js/faker');
 
 const Trucks = [...Array(50)].map(() => (
   {
-    
     plate_number: faker.vehicle.vin().substring(0, 8),
     license_type: faker.helpers.arrayElement(['yellow', 'black']),
     truck_type:faker.helpers.arrayElement(['tronton', 'container', 'cde']),
