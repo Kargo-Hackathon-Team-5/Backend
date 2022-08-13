@@ -9,11 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       truck_id: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER
       },
       driver_id: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER
       },
       origin: {
