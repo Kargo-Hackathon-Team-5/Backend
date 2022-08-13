@@ -19,7 +19,7 @@ const detailDriver = async (req, res) => {
             where: { id: id },
         })
 
-        if (!data) return res.rest.badRequest(`Can't find truck with ID ${id}.`);
+        if (!data) return res.rest.badRequest(`Can't find driver with ID ${id}.`);
         res.rest.success({ data: data });
     } catch (error) {
         return res.rest.serverError('Internal Server Error')
