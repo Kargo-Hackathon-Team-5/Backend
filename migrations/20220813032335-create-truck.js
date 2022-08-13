@@ -27,7 +27,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.ENUM('allocated', 'on_going_to_origin', 'at_origin', 'on_going_to_destination', 'at_destination', 'completed')
+        type: Sequelize.BOOLEAN,
+        default: 0
       },
       createdAt: {
         allowNull: false,

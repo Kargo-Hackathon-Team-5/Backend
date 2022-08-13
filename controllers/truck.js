@@ -1,5 +1,32 @@
 const db = require("../models");
 const res = require("express/lib/response");
+const { body, validationResult } = require('express-validator/check')
+
+const validate = (method) => {
+    switch (method) {
+      case 'createTruck': {
+       return [ 
+          body('plate_number', 'plate_number doesnt exists').exists(),
+          body('license_type', 'license_type doesnt exists').exists(),
+          body('truck_type', 'truck_type doesnt exists').exists(),
+          body('production_year', 'product_year doesnt exists').exists(),
+          body('stnk', 'stnk doesnt exists').exists(),
+          body('kir', 'kir doesnt exists').exists()
+         ]   
+      }
+      case 'updateTruck': {
+        return [ 
+            body('plate_number', 'plate_number doesnt exists').exists(),
+            body('license_type', 'license_type doesnt exists').exists(),
+            body('truck_type', 'truck_type doesnt exists').exists(),
+            body('production_year', 'product_year doesnt exists').exists(),
+            body('stnk', 'stnk doesnt exists').exists(),
+            body('kir', 'kir doesnt exists').exists(),
+            body('status', 'status doesnt exists').exists()
+           ]  
+       }
+    }
+}
 
 const listTrucks = async (req, res) => {
     try {
@@ -28,6 +55,12 @@ const detailTrucks = async (req, res) => {
 
 const addTruck = async (req, res) => {
     try {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()){
+            return res.rest.badRequest(`Error : Body is not Valid`);   
+        }
+
         db.Truck.create(req.body).then((result) => {
             res.rest.success("Truck has been added successfully")
         });
@@ -38,6 +71,12 @@ const addTruck = async (req, res) => {
 
 const updateTruck = async (req, res) => {
     try {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()){
+            return res.rest.badRequest(`Error : Body is not Valid`);   
+        }
+
         let { id } = req.params
         if(!id) res.rest.badRequest("ID parameter is empty");
 
@@ -50,6 +89,7 @@ const updateTruck = async (req, res) => {
 }
 
 module.exports = {
+    validate,
     listTrucks,
     detailTrucks,
     addTruck,

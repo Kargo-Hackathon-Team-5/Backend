@@ -21,14 +21,7 @@ const Trucks = [...Array(50)].map(() => (
       'https://jasamart.com/application/public/products/1748_945_1.jpg',
       'https://i0.wp.com/prokopim.magetan.go.id/wp-content/uploads/2020/06/20200602_062729.jpg?fit=480%2C1280&ssl=1'
     ]),
-    status: faker.helpers.arrayElement([
-      'allocated', 
-      'on_going_to_origin', 
-      'at_origin', 
-      'on_going_to_destination', 
-      'at_destination', 
-      'completed'
-    ]),
+    status: faker.helpers.arrayElement([0, 1]),
     createdAt: new Date(),
     updatedAt: new Date()
   }

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     production_year: DataTypes.INTEGER,
     stnk: DataTypes.STRING,
     kir: DataTypes.STRING,
-    status: DataTypes.ENUM('allocated', 'on_going_to_origin', 'at_origin', 'on_going_to_destination', 'at_destination', 'completed')
+    status: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Truck',
