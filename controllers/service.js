@@ -24,8 +24,7 @@ const listCity = async (req, res) => {
             res.rest.success({ data: response })
         })
     } catch (error) {
-        console.log(error);
-        return res.rest.serverError({message: error})
+        return res.rest.serverError(error.message)
     }
 }
 

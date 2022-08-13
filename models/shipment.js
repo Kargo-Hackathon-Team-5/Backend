@@ -9,7 +9,7 @@ const db = require("./index");
 module.exports = (sequelize, DataTypes) => {
   class Shipment extends Model {
     static associate(models) {
-      Shipment.hasOne(models.Driver, {
+      Shipment.belongsTo(models.Driver, {
         as: 'driver',
         foreignKey: 'driver_id'
       })
