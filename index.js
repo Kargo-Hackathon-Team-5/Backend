@@ -1,6 +1,7 @@
 const ExpressPinoLogger = require("express-pino-logger")
 const restResponse = require("express-rest-response")
 const bodyParser = require("body-parser")
+const expressValidator = require('express-validator')
 const express = require('express')
 const driverController = require('./controllers/driver.js')
 const app = express()
@@ -22,6 +23,8 @@ app.use(pino);
 app.use(restResponse(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// app.use(expressValidator())
 
 // App Router
 app.get('/', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
