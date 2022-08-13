@@ -8,7 +8,7 @@ const Shipments = [...Array(50)].map(() => (
     driver_id: faker.datatype.number({ min: 5, max: 30 }),
     origin: faker.helpers.arrayElement(['Solo', 'Bali', 'Banten']),
     destination: faker.helpers.arrayElement(['Jakarta', 'Bandung', 'Tangerang', 'Surabaya']),
-    loading_date: faker.date.betweens('2021-12-20T00:00:00.000Z', '2022-07-12T00:00:00.000Z'),
+    loading_date: faker.date.past(),
     status: faker.helpers.arrayElement([
       'allocated', 
       'on_going_to_origin', 
