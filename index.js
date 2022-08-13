@@ -1,11 +1,12 @@
-const ExpressPinoLogger = require("express-pino-logger");
-const restResponse = require("express-rest-response");
-const bodyParser = require("body-parser");
+const ExpressPinoLogger = require("express-pino-logger")
+const restResponse = require("express-rest-response")
+const bodyParser = require("body-parser")
 const express = require('express')
 const app = express()
 const port = 3000
 
-const truckRouter = require('./routers/truck');
+const truckRouter = require('./routers/truck')
+const driverRouter = require('./routers/driver')
 
 const options = {
   showStatusCode: true,
@@ -20,11 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.get('/', (req, res) => {
-  res.rest.success({ data: [] });
-})
-
+app.get('/', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
 app.use('/truck', truckRouter);
+app.use('/driver', driverRouter);
 
 app.use((req, res, next) => {
   const err = new Error("");
@@ -34,7 +33,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   if (err.status === 404) {
-    res.rest.notFound("End point not found");
+    res.rest.notFound();
   } else {
     res.rest.serverError(err.message || "Internal server error");
   }
