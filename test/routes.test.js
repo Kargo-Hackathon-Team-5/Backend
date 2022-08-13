@@ -45,3 +45,55 @@ describe('User API', () => {
         expect(res.body).toHaveProperty('message')
     })
 })
+
+
+describe('Truck API', () => {
+    it('should response 200 status code', async () => {
+        const res = await request(app).get('/api')
+        expect(res.statusCode).toEqual(200)
+    }),
+
+    it('should show Trucks', async () => {
+        const res = await request(app).get('/api/truck')
+        expect(res.status).toEqual(200)
+        expect(res.body).toHaveProperty('data')
+    }),
+
+    it('should show one truck', async () => {
+        const res = await request(app).get('/api/truck/1')
+        expect(res.status).toEqual(200)
+        expect(res.body).toHaveProperty('data')
+    }),
+
+    it('should create a new truck', async () => {
+        const res = await request(app)
+            .post('/api/truck')
+            .send({
+                plate_number : "PlateNumber1",
+                license_type: 1,
+                truck_type: 1,
+                production_year : "2001",
+                stnk : "https://asset.kompas.com/crops/xsITn8I2l1MlEMyZh3IdOkQ8oKU=/0x73:1280x926/750x500/data/photo/2021/09/01/612e627c91f83.jpg",
+                kir : "https://asset.kompas.com/crops/xsITn8I2l1MlEMyZh3IdOkQ8oKU=/0x73:1280x926/750x500/data/photo/2021/09/01/612e627c91f83.jpg",
+                status: 0
+            })
+        expect(res.statusCode).toEqual(201)
+        expect(res.body).toHaveProperty('message')
+    })
+
+    it('should update a truck', async () => {
+        const res = await request(app)
+            .put('/api/truck/1')
+            .send({
+                plate_number : "PlateNumber1",
+                license_type: 1,
+                truck_type: 1,
+                production_year : "2001",
+                stnk : "https://asset.kompas.com/crops/xsITn8I2l1MlEMyZh3IdOkQ8oKU=/0x73:1280x926/750x500/data/photo/2021/09/01/612e627c91f83.jpg",
+                kir : "https://asset.kompas.com/crops/xsITn8I2l1MlEMyZh3IdOkQ8oKU=/0x73:1280x926/750x500/data/photo/2021/09/01/612e627c91f83.jpg",
+                status: 1
+            })
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).toHaveProperty('message')
+    })
+})
