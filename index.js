@@ -23,12 +23,14 @@ app.use(restResponse(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 // App Router
 app.get('/api', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
 app.use('/api/service', serviceRouter);
 app.use('/api/truck', truckRouter);
 app.use('/api/driver', driverRouter);
 app.use('/api/shipment', shipmentRouter);
+
 
 // Router Global Error Handling
 app.use((req, res, next) => {
@@ -45,6 +47,8 @@ app.use((err, req, res, next) => {
   }
 });
 
+
+// App Running
 app.listen(port, () => {
   console.log(`Success Listening on port ${port}`)
 })
