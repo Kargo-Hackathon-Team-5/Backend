@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       truck_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       driver_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       origin: {
         type: Sequelize.STRING
