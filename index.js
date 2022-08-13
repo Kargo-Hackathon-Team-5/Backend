@@ -8,6 +8,7 @@ const port = 3000
 
 const truckRouter = require('./routers/truck')
 const driverRouter = require('./routers/driver')
+const serviceRouter = require('./routers/service')
 
 const options = {
   showStatusCode: true,
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 
 // App Router
 app.get('/', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
+app.use('/service', serviceRouter);
 app.use('/truck', truckRouter);
 app.use('/driver', driverRouter);
 
