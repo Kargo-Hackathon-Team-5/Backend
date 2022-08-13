@@ -87,13 +87,6 @@ describe('User API', () => {
         expect(res.body).toHaveProperty('data')
     }),
 
-    afterAll(done => {
-        done();
-    });
-})
-
-
-describe('Truck API', () => {
     it('should response 200 status code', async () => {
         const res = await request(app).get('/api')
         expect(res.statusCode).toEqual(200)
@@ -142,4 +135,8 @@ describe('Truck API', () => {
         expect(res.statusCode).toEqual(200)
         expect(res.body).toHaveProperty('message')
     })
+
+    afterAll(done => {
+        done();
+    });
 })
