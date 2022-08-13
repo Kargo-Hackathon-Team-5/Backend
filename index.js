@@ -1,9 +1,9 @@
 const ExpressPinoLogger = require("express-pino-logger")
 const restResponse = require("express-rest-response")
 const bodyParser = require("body-parser")
-const expressValidator = require('express-validator')
 const express = require('express')
-const driverController = require('./controllers/driver.js')
+const cors = require("cors");
+
 const app = express()
 const port = 3000
 
@@ -17,14 +17,14 @@ const options = {
   showDefaultMessage: true,
 };
 
-var pino = ExpressPinoLogger();
-app.use(pino);
+const pino = ExpressPinoLogger();
 
+app.use(pino);
+app.use(cors())
 app.use(restResponse(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use(expressValidator())
 
 // App Router
 app.get('/api', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
@@ -54,3 +54,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Success Listening on port ${port}`)
 })
+
+module.exports = app

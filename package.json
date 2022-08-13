@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "axios": "^0.27.2",
     "body": "^5.1.0",
     "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-pino-logger": "^7.0.0",
     "express-rest-response": "^1.2.0",
@@ -32,6 +33,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",
-    "sequelize-cli": "^6.4.1"
+    "jest": "^28.1.3",
+    "sequelize-cli": "^6.4.1",
+    "supertest": "^6.2.4"
   }
 }

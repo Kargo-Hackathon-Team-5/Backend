@@ -1,6 +1,6 @@
 const db = require("../models");
 const res = require("express/lib/response");
-const { body, validationResult } = require('express-validator/check')
+const { body, validationResult } = require('express-validator')
 
 const validate = (method) => {
     switch (method) {
