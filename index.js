@@ -2,6 +2,7 @@ const ExpressPinoLogger = require("express-pino-logger")
 const restResponse = require("express-rest-response")
 const bodyParser = require("body-parser")
 const express = require('express')
+const driverController = require('./controllers/driver.js')
 const app = express()
 const port = 3000
 
@@ -20,11 +21,12 @@ app.use(restResponse(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+// App Router
 app.get('/', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
 app.use('/truck', truckRouter);
 app.use('/driver', driverRouter);
 
+// Router Global Error Handling
 app.use((req, res, next) => {
   const err = new Error("");
   err.status = 404;
