@@ -10,6 +10,11 @@ const listShipments = async (req, res) => {
                 model: Driver,
                 as: 'driver',
                 attributes: {exclude: ['status', 'createdAt', 'updatedAt']}
+            },
+            {
+                model: Truck,
+                as: 'truck',
+                attributes: ['id', 'plate_number']
             }
         ]
 

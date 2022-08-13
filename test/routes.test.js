@@ -19,7 +19,6 @@ describe('User API', () => {
         expect(res.body).toHaveProperty('data')
     }),
 
-
     it('should create a new driver', async () => {
         const res = await request(app)
             .post('/api/driver')
