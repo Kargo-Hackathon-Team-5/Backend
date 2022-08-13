@@ -30,7 +30,7 @@ const listDrivers = async (req, res) => {
         res.rest.success({ data: data });
     } catch (error) {
         console.log(error);
-        return res.rest.serverError({message: error})
+        return res.rest.serverError(error.message)
     }
 }
 
@@ -45,7 +45,7 @@ const detailDriver = async (req, res) => {
         if (!data) return res.rest.badRequest(`Can't find driver with ID ${id}.`);
         res.rest.success({ data: data });
     } catch (error) {
-        return res.rest.serverError('Internal Server Error')
+        return res.rest.serverError(error.message)
     }
 }
 

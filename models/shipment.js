@@ -1,18 +1,26 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
+
+const db = require("./index");
+
 module.exports = (sequelize, DataTypes) => {
   class Shipment extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Shipment.belongsTo(models.Driver, {
+        as: 'driver',
+        foreignKey: 'driver_id'
+      })
+
+      Shipment.belongsTo(models.Truck, {
+        as: 'truck',
+        foreignKey: 'truck_id'
+      })
     }
   }
+
   Shipment.init({
     truck_id: DataTypes.STRING,
     driver_id: DataTypes.STRING,
@@ -24,5 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Shipment',
   });
+
   return Shipment;
 };

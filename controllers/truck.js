@@ -6,13 +6,14 @@ const listTrucks = async (req, res) => {
         const data = await db.Truck.findAll();
         res.rest.success({ data: data })
     } catch (error) {
-        return res.rest.serverError({message: error})
+        return res.rest.serverError(error.message)
     }
 }
 
 const detailTrucks = async (req, res) => {
     try {
         let { id } = req.params
+        if(!id) res.rest.badRequest("ID parameter is empty");
 
         const data = await db.Truck.findOne({
             where: { id: id },
@@ -21,7 +22,7 @@ const detailTrucks = async (req, res) => {
         if (!data) return res.rest.badRequest(`Can't find truck with ID ${id}.`)
         res.rest.success({ data: data });
     } catch (error) {
-        return res.rest.serverError('Internal Server Error')
+        return res.rest.serverError(error.message)
     }
 }
 
@@ -31,19 +32,20 @@ const addTruck = async (req, res) => {
             res.rest.success("Truck has been added successfully")
         });
     } catch (error) {
-        res.rest.badRequest(error)
+        res.rest.badRequest(error.message)
     }
 }
 
 const updateTruck = async (req, res) => {
     try {
         let { id } = req.params
-        
+        if(!id) res.rest.badRequest("ID parameter is empty");
+
         db.Truck.update(req.body, { where: { id: id } }).then(() => {
             res.rest.success("Truck has been updated successfully");
         })
     } catch (error) {
-        res.rest.badRequest(error)
+        res.rest.badRequest(error.message)
     }
 }
 

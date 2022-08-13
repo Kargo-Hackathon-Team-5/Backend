@@ -1,9 +1,21 @@
 const db = require("../models");
 const res = require("express/lib/response");
+const Driver = db.Driver;
 
 const listShipments = async (req, res) => {
     try {
-        const data = await db.Shipment.findAll();
+        relations = [
+            {
+                model: Driver,
+                as: 'driver',
+                attributes: ['id', 'name']
+            }
+        ]
+
+        const data = await db.Shipment.findAll({
+            include: relations
+        });
+
         res.rest.success({ data: data });
     } catch (error) {
         console.log(error);
@@ -41,12 +53,13 @@ const updateShipment = async(req, res) => {
     if(!id) res.rest.badRequest("ID parameter is empty");
     
     try{
-        const updatedDriver = await db.Shipment.update(req.body, {
+        await db.Shipment.update(req.body, {
             where: {
                 id: id
             }
         });
-        res.rest.success({message : "Successfully Updating Shipment"})
+
+        res.rest.success({ message : "Successfully Updating Shipment" })
     }catch(error){
         res.rest.serverError(error.message);
     }
