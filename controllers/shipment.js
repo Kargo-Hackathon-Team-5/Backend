@@ -1,6 +1,7 @@
 const db = require("../models");
 const res = require("express/lib/response");
 const Driver = db.Driver;
+const Truck = db.Truck;
 
 const listShipments = async (req, res) => {
     try {
@@ -8,7 +9,7 @@ const listShipments = async (req, res) => {
             {
                 model: Driver,
                 as: 'driver',
-                attributes: ['id', 'name']
+                attributes: {exclude: ['status', 'createdAt', 'updatedAt']}
             }
         ]
 
@@ -27,14 +28,28 @@ const detailShipment = async (req, res) => {
     try {
         let { id } = req.params;
 
+        relations = [
+            {
+                model: Driver,
+                as: 'driver',
+                attributes: {exclude: ['status', 'createdAt', 'updatedAt']}
+            },
+            {
+                model: Truck,
+                as: 'truck',
+                attributes: {exclude: ['createdAt', 'updatedAt']}
+            }
+        ]
+
         const data = await db.Shipment.findOne({
             where: { id: id },
+            include: relations
         })
 
         if (!data) return res.rest.badRequest(`Can't find truck with ID ${id}.`);
         res.rest.success({ data: data });
     } catch (error) {
-        return res.rest.serverError('Internal Server Error')
+        return res.rest.serverError(error.message)
     }
 }
 
