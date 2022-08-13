@@ -5,9 +5,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const truckRouter = require('./routers/truck');
+
 const options = {
-  showStatusCode: false,
-  showDefaultMessage: false,
+  showStatusCode: true,
+  showDefaultMessage: true,
 };
 
 var pino = ExpressPinoLogger();
@@ -16,6 +18,13 @@ app.use(pino);
 app.use(restResponse(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
+app.get('/', (req, res) => {
+  res.rest.success({ data: [] });
+})
+
+app.use('/truck', truckRouter);
 
 app.use((req, res, next) => {
   const err = new Error("");
@@ -30,10 +39,6 @@ app.use((err, req, res, next) => {
     res.rest.serverError(err.message || "Internal server error");
   }
 });
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
 app.listen(port, () => {
   console.log(`Success Listening on port ${port}`)

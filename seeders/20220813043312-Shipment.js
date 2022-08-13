@@ -22,8 +22,6 @@ const Shipments = [...Array(50)].map(() => (
   }
 ))
 
-console.log(faker.date.betweens(['2021-12-20T00:00:00.000Z', '2022-07-12T00:00:00.000Z']),);
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Shipments', Shipments, {});
