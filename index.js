@@ -8,6 +8,7 @@ const port = 3000
 
 const truckRouter = require('./routers/truck')
 const driverRouter = require('./routers/driver')
+const shipmentRouter = require('./routers/shipment')
 
 const options = {
   showStatusCode: true,
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => { res.rest.success({ data: "Health Check OK" }) })
 app.use('/truck', truckRouter);
 app.use('/driver', driverRouter);
+app.use('/shipment', shipmentRouter);
 
 // Router Global Error Handling
 app.use((req, res, next) => {
