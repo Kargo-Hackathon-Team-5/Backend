@@ -1,5 +1,28 @@
 const db = require("../models");
 const res = require("express/lib/response");
+const { body, validationResult } = require('express-validator/check')
+
+const validate = (method) => {
+    switch (method) {
+      case 'createDriver': {
+       return [ 
+          body('name', 'Name doesnt exists').exists(),
+          body('phone', 'Phone doesnt exists').exists(),
+          body('id_card', 'id_card doesnt exists').exists(),
+          body('license', 'license doesnt exists').exists()
+         ]   
+      }
+      case 'updateDriver': {
+        return [ 
+            body('name', 'Name doesnt exists').exists(),
+            body('phone', 'Phone doesnt exists').exists(),
+            body('id_card', 'IDCard doesnt exists').exists(),
+            body('license', 'License doesnt exists').exists(),
+            body('status', 'Status doesnt exists').exists()
+          ]   
+       }
+    }
+}
 
 const listDrivers = async (req, res) => {
     try {
@@ -28,6 +51,12 @@ const detailDriver = async (req, res) => {
 
 const createDriver = async(req, res)=> {
     try{
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()){
+            return res.rest.badRequest(`Error : Body is not Valid`);   
+        }
+
         const savedDriver = await db.Driver.create(req.body);
         res.rest.success({data: savedDriver});
     }catch(error){
@@ -41,6 +70,12 @@ const updateDriver = async(req, res) => {
     if(!id) res.rest.badRequest("ID parameter is empty");
     console.log(id)
     try{
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()){
+            return res.rest.badRequest(`Error : Body is not Valid`);   
+        }
+
         const updatedDriver = await db.Driver.update(req.body, {
             where: {
                 id: id
@@ -52,4 +87,4 @@ const updateDriver = async(req, res) => {
     }
 }
 
-module.exports = { listDrivers, detailDriver, createDriver, updateDriver}
+module.exports = { validate, listDrivers, detailDriver, createDriver, updateDriver }
