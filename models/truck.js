@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     truck_type: DataTypes.ENUM('tronton', 'container', 'cde'),
     production_year: DataTypes.INTEGER,
     stnk: DataTypes.STRING,
-    kir: DataTypes.STRING
+    kir: DataTypes.STRING,
+    status: DataTypes.ENUM('allocated', 'on_going_to_origin', 'at_origin', 'on_going_to_destination', 'at_destination', 'completed')
   }, {
     sequelize,
     modelName: 'Truck',

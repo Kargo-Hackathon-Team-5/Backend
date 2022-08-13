@@ -26,6 +26,9 @@ module.exports = {
       kir: {
         type: Sequelize.STRING
       },
+      status: {
+        type: Sequelize.ENUM('allocated', 'on_going_to_origin', 'at_origin', 'on_going_to_destination', 'at_destination', 'completed')
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
